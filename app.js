@@ -15,13 +15,15 @@ app.use((req, res, next) => {
 
 app.use('/api/books', booksRoute);
 
+const PORT = process.env.PORT || 3000;
+
 const { connectToDb, getDb } = require('./db');
 var db;
 
 connectToDb((err) => {
     if (!err) {
-        app.listen(port, () => {
-            console.log('app listening on port', port);
+        app.listen(PORT, () => {
+            console.log('app listening on port', PORT);
         })
         db = getDb()
     }
@@ -72,4 +74,17 @@ app.patch('/:id', (req, res) => {
     } else {
         res.status(500).json({ "error": "Not a valid id" })
     }
-})
+});
+
+app.delete('/:id', async (req, res) => {
+    try {
+        if (ObjectId.isValid(req.params.id)) {
+            db.collection('books')
+            .deleteOne( { _id: ObjectId(req.params.id) } )
+            res.status(200).json(result)
+        } else res.status(500).json( { "error": "Not a valid id" } )
+    } catch (err) {
+        console.error(new Error(err))
+        res.status(500).json('This document can not be deleted');
+    }
+}) 
