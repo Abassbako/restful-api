@@ -2,9 +2,9 @@ const express = require('express');
 
 const app = express();
 
-const { ObjectId } = require('mongodb');
-
 const booksRoute = require('./routes/book');
+
+const { ObjectId } = require('mongodb');
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -13,7 +13,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/books', booksRoute);
+app.use('/api/v1/books', booksRoute);
 
 const PORT = process.env.PORT || 3000;
 
@@ -87,4 +87,4 @@ app.delete('/:id', async (req, res) => {
         console.error(new Error(err))
         res.status(500).json('This document can not be deleted');
     }
-}) 
+});
