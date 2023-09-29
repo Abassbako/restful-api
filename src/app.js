@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-const booksRoute = require('./routes/book');
+const booksRoute = require('../routes/book');
 
 const { ObjectId } = require('mongodb');
 
