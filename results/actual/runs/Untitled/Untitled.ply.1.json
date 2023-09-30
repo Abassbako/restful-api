@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Untitled",
+    "test": "Untitled",
+    "type": "request",
+    "start": "2023-09-30T00:31:05.293Z",
+    "end": "2023-09-30T00:31:05.314Z",
+    "result": {
+      "status": "Errored",
+      "message": "Request 'Untitled' ERRORED in 21 ms: Invalid url: localhost:5000/api/v1/books"
+    }
+  }
+]

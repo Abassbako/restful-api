@@ -168,4 +168,19 @@ router.post('/', (req, res) => {
     books.push(req.body);
 });
 
+router.get('/:name', (req, res) => {
+    const { name } = req.params;
+    const booksName = books.find((b) => b.name === name);
+    res.send(booksName);
+});
+
+router.get('/', (req, res) => {
+    const { rating } = req.query;
+    const parsedRating = parseInt(rating);
+    if (!isNaN(parsedRating)) {
+        const filteredRating = books.filter((b) => b.rating <= parsedRating);
+        res.send(filteredRating);
+    } else res.send(books);
+});
+
 module.exports = router;
